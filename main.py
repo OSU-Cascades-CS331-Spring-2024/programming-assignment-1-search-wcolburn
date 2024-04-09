@@ -1,3 +1,5 @@
+import json
+
 file = open("france.txt")
-print(file.read())
+file.readline()
 file.close()
