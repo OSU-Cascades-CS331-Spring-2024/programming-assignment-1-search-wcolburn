@@ -28,11 +28,39 @@ def create_map_from_file(file_name):
     return new_map
 
 
+def bfs(map, city_a, city_b):
+    pass
+
+
+def dls(map, city_a, city_b):
+    pass
+
+
+def ucs(map, city_a, city_b):
+    pass
+
+
+def astar(map, city_a, city_b):
+    pass
+
+
 def main(**kwargs):
     file_name = kwargs["file"]
     map = create_map_from_file(file_name)
-    for city in map.cities:
-        print(city.name)
+
+    if kwargs["A"] and kwargs["B"]:
+        search_type = kwargs["search"]
+        city_a = kwargs["A"]
+        city_b = kwargs["B"]
+
+        if search_type == "bfs":
+            bfs(map, city_a, city_b)
+        elif search_type == "dls":
+            dls(map, city_a, city_b)
+        elif search_type == "ucs":
+            ucs(map, city_a, city_b)
+        elif search_type == "astar":
+            astar(map, city_a, city_b)
 
 
 if __name__ == '__main__':
