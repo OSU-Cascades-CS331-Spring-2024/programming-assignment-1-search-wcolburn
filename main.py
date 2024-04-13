@@ -1,5 +1,18 @@
 from city import City
 from map import Map
+import sys
+import argparse
+
+p = argparse.ArgumentParser()
+p.add_argument("-s", "--search", help="Search type", default="bfs", choices=("bfs", "dls", "ucs", "astar"))
+p.add_argument("-A", help="Initial city", required=False)
+p.add_argument("-B", help="End city", required=False)
+p.add_argument("-f", "--file", help="File to load map from", required=True)
+
+
+def main(**kwargs):
+    print(kwargs["file"])
+
 
 file = open("france.txt")
 
@@ -36,3 +49,7 @@ while i < len(text):
             break
 
 file.close()
+
+if __name__ == '__main__':
+    args = p.parse_args()
+    main(**vars(args))
