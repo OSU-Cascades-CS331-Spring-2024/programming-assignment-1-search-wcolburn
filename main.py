@@ -29,6 +29,18 @@ def create_map_from_file(file_name):
 
 
 def bfs(map, city_a, city_b):
+    queue = [city_a]  # Queue holds frontier - cities to be visited in FIFO order
+    path = []  # Holds the path we visit cities
+    while len(queue) > 0:
+        city = queue.pop(0)
+        path.append(city)
+        # If current node is city_b, path is finished
+        if city == city_b:
+            return path
+        else:  # Else add any unexplored neighbors to queue
+            for next_city in map.get_neighbors(city):
+                queue.append(next_city)
+
     pass
 
 
