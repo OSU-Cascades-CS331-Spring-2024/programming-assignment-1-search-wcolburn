@@ -10,5 +10,11 @@ class Map:
         self.distances[city1] = [city2, distance]
         self.distances[city2] = [city1, distance]
 
+    def get_neighbors(self, city):
+        neighbors = []
+        for distance_pair in self.distances[city]:
+            neighbors.append(distance_pair[0])
+        return neighbors
+
     def add_city(self, city):
         self.cities.append(city)
