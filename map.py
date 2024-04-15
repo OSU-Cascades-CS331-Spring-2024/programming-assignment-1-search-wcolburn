@@ -13,6 +13,9 @@ class Map:
         self.distances[city1.name][city2.name] = distance
         self.distances[city2.name][city1.name] = distance
 
+    def get_distance(self, city1, city2):
+        return self.distances[city1.name][city2.name]
+
     def get_neighbors(self, city):
         neighbors = []
         for distance_pair in self.distances[city]:
