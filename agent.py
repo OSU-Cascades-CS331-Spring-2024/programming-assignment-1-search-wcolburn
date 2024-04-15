@@ -2,6 +2,10 @@ def expand(map, city):
     return map.get_neighbors(city)
 
 
+def calculate_cost(map, path):
+    cost = 0
+
+
 class Agent:
     def __init__(self):
         self.goal = None
@@ -19,14 +23,15 @@ class Agent:
             # If current node is city_b, path is finished
             if city == self.goal:
                 info = dict()
+                info["path"] = path
                 info["explored"] = len(path)
                 info["maintained"] = num_maintained
                 info["expanded"] = num_expanded
-                return path
+                return info
             else:  # Else add any unexplored neighbors to queue
                 for next_city in expand(map, city):
-                    num_expanded += 1
                     if next_city not in visited:
                         visited.append(next_city)
                         queue.append(next_city)
                         num_maintained += 1
+                num_expanded += 1
