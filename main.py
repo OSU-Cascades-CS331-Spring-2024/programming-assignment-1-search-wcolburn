@@ -1,4 +1,3 @@
-from city import City
 from map import Map
 import argparse
 
@@ -9,15 +8,13 @@ def create_map_from_file(file_name):
     new_map = Map()
     i = 0
     while i < len(text):
-        city_name = text[i]
-        city = City(city_name)
+        city = text[i]
         new_map.add_city(city)
         i += 10  # Skip coordinates
         while text[i][0] == 'v' and text[i][1] == 'a':
             if text[i] == "va-":  # In case of line breaking
                 i += 1
-            next_city_name = text[i].replace('va-', '', 1)
-            next_city = City(next_city_name)
+            next_city = text[i].replace('va-', '', 1)
             i += 1
             distance = int(text[i])
             new_map.add_distance(city, next_city, distance)
@@ -58,9 +55,9 @@ def main(**kwargs):
     file_name = kwargs["file"]
     map = create_map_from_file(file_name)
 
-    calais = map.get_city("calais")
-    neighbors = map.get_neighbors(calais)
-    print(neighbors)
+    # calais = map.get_city("calais")
+    # neighbors = map.get_neighbors(calais)
+    # print(neighbors)
 
     if kwargs["A"] and kwargs["B"]:
         search_type = kwargs["search"]
