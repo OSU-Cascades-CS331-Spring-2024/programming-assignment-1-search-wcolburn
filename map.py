@@ -6,9 +6,12 @@ class Map:
         self.distances = {}
 
     def add_distance(self, city1, city2, distance):
-        # print(distance)
-        self.distances[city1] = [city2, distance]
-        self.distances[city2] = [city1, distance]
+        if city1.name not in self.distances:
+            self.distances[city1.name] = {}
+        if city2.name not in self.distances:
+            self.distances[city2.name] = {}
+        self.distances[city1.name][city2.name] = distance
+        self.distances[city2.name][city1.name] = distance
 
     def get_neighbors(self, city):
         neighbors = []

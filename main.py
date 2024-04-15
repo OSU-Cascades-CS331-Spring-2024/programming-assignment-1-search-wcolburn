@@ -41,8 +41,6 @@ def bfs(map, city_a, city_b):
             for next_city in map.get_neighbors(city):
                 queue.append(next_city)
 
-    pass
-
 
 def dls(map, city_a, city_b):
     pass
@@ -60,13 +58,15 @@ def main(**kwargs):
     file_name = kwargs["file"]
     map = create_map_from_file(file_name)
 
+    print(map.distances["calais"])
+
     if kwargs["A"] and kwargs["B"]:
         search_type = kwargs["search"]
         city_a = kwargs["A"]
         city_b = kwargs["B"]
 
         if search_type == "bfs":
-            bfs(map, city_a, city_b)
+            print(bfs(map, city_a, city_b))
         elif search_type == "dls":
             dls(map, city_a, city_b)
         elif search_type == "ucs":
