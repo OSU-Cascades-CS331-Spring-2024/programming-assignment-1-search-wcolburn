@@ -1,4 +1,5 @@
 from map import Map
+from agent import Agent
 import argparse
 
 
@@ -25,22 +26,6 @@ def create_map_from_file(file_name):
     return new_map
 
 
-def bfs(map, city_a, city_b):
-    queue = [city_a]  # Queue holds frontier - cities to be visited in FIFO order
-    path = []
-    visited = [city_a]
-    while len(queue) > 0:
-        city = queue.pop(0)
-        path.append(city)
-        # If current node is city_b, path is finished
-        if city == city_b:
-            return path
-        else:  # Else add any unexplored neighbors to queue
-            for next_city in map.get_neighbors(city):
-                if next_city not in visited:
-                    visited.append(next_city)
-                    queue.append(next_city)
-
 
 def dls(map, city_a, city_b):
     pass
@@ -58,9 +43,7 @@ def main(**kwargs):
     file_name = kwargs["file"]
     map = create_map_from_file(file_name)
 
-    # calais = map.get_city("calais")
-    # neighbors = map.get_neighbors(calais)
-    # print(neighbors)
+    agent = Agent()
 
     if kwargs["A"] and kwargs["B"]:
         search_type = kwargs["search"]
@@ -68,7 +51,7 @@ def main(**kwargs):
         city_b = kwargs["B"]
 
         if search_type == "bfs":
-            print(bfs(map, city_a, city_b))
+            agent.bfs(map, city_a, city_b)
         elif search_type == "dls":
             dls(map, city_a, city_b)
         elif search_type == "ucs":
