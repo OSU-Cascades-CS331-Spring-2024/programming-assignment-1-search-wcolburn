@@ -51,7 +51,7 @@ def main(**kwargs):
         city_b = kwargs["B"]
 
         if search_type == "bfs":
-            agent.bfs(map, city_a, city_b)
+            print(agent.bfs(map, city_a, city_b))
         elif search_type == "dls":
             dls(map, city_a, city_b)
         elif search_type == "ucs":

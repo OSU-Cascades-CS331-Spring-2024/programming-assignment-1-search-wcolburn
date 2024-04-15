@@ -1,3 +1,7 @@
+def expand(map, city):
+    return map.get_neighbors(city)
+
+
 class Agent:
     def __init__(self):
         self.goal = None
@@ -20,7 +24,7 @@ class Agent:
                 info["expanded"] = num_expanded
                 return path
             else:  # Else add any unexplored neighbors to queue
-                for next_city in map.get_neighbors(city):
+                for next_city in expand(map, city):
                     num_expanded += 1
                     if next_city not in visited:
                         visited.append(next_city)
