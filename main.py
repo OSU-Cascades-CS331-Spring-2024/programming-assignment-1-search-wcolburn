@@ -26,11 +26,6 @@ def create_map_from_file(file_name):
     return new_map
 
 
-
-def dls(map, city_a, city_b):
-    pass
-
-
 def ucs(map, city_a, city_b):
     pass
 
@@ -51,9 +46,9 @@ def main(**kwargs):
         city_b = kwargs["B"]
 
         if search_type == "bfs":
-            print(agent.bfs(map, city_a, city_b))
+            agent.bfs(map, city_a, city_b)
         elif search_type == "dls":
-            dls(map, city_a, city_b)
+            agent.dls(map, city_a, city_b)
         elif search_type == "ucs":
             ucs(map, city_a, city_b)
         elif search_type == "astar":
