@@ -58,7 +58,9 @@ def main(**kwargs):
     file_name = kwargs["file"]
     map = create_map_from_file(file_name)
 
-    print(map.distances["calais"])
+    calais = map.get_city("calais")
+    neighbors = map.get_neighbors(calais)
+    print(neighbors)
 
     if kwargs["A"] and kwargs["B"]:
         search_type = kwargs["search"]

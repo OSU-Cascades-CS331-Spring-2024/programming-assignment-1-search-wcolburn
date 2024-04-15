@@ -17,10 +17,12 @@ class Map:
         return self.distances[city1.name][city2.name]
 
     def get_neighbors(self, city):
-        neighbors = []
-        for distance_pair in self.distances[city]:
-            neighbors.append(distance_pair[0])
-        return neighbors
+        return list(self.distances[city.name].keys())
 
     def add_city(self, city):
         self.cities.append(city)
+
+    def get_city(self, city_name):
+        for city in self.cities:
+            if city.name == city_name:
+                return city
