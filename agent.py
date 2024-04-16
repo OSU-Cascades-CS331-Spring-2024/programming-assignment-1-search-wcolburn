@@ -21,6 +21,13 @@ def create_path(parent_list, start, end):
     return path
 
 
+def is_cycle(parent, city):
+    child = city
+    parent = parent[city]
+    grandparent = parent[parent]
+    return grandparent == child or grandparent == parent or parent == child
+
+
 class Agent:
     def __init__(self):
         self.goal = None
@@ -62,24 +69,28 @@ class Agent:
 
     def dls(self, map, city_a, city_b, depth):
         self.goal = city_b
-        queue = [city_a]  # Queue holds frontier - cities to be visited in FIFO order
+        queue = [city_a]  # LIFO - Holds a city until it is fully explored
         parent = {}
-        visited = [city_a]
+        info = dict()
+        info["path"] = "failure"  # Failure until depth is exceeded or goal is found
+        num_visited = 0
         num_expanded = 0  # Number of cities expanded by adding neighbors to frontier
         num_maintained = 1  # Number of cities that enter the frontier. Begins at 1 for city_a.
         while len(queue) > 0:
-            city = queue.pop(0)
+            city = queue.pop()
+            num_visited += 1
             # If current node is city_b, path is finished
             if city == self.goal:
-                info = dict()
                 path = create_path(parent, city_a, city_b)
                 info["path"] = path
-                info["explored"] = len(visited)
+                info["explored"] = num_visited
                 info["maintained"] = num_maintained
                 info["expanded"] = num_expanded
                 info["cost"] = calculate_cost(map, path)
                 return info
-            else:  # Else add any unexplored neighbors to queue
+            if len(queue) >= depth:
+                info["path"] = "cutoff"
+            elif not is_cycle(parent, city):
                 for next_city in expand(map, city):
                     if next_city not in visited:
                         visited.append(next_city)
@@ -87,3 +98,4 @@ class Agent:
                         parent[next_city] = city
                         num_maintained += 1
                 num_expanded += 1
+        return info
