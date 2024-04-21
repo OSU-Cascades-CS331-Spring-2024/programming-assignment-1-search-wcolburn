@@ -21,11 +21,33 @@ def create_path(parent_list, start, end):
     return path
 
 
-def is_cycle(parent, city):
-    child = city
-    parent = parent[city]
-    grandparent = parent[parent]
-    return grandparent == child or grandparent == parent or parent == child
+def is_cycle(parents, city):
+    path = []
+    current = city
+    while current in parents.keys():
+        parent = parents[current]
+        if parent in path:
+            return True
+        path.append(parent)
+        current = parent
+    return False
+
+
+# def calc_depth(parents, start, city):
+#     current = city
+#     city_depth = 0
+#     while current != start:
+#         current = get_parent(parents, current)
+#         city_depth += 1
+#         print(current)
+#     return city_depth
+
+
+def get_parent(parents, city):
+    if city not in parents.keys():
+        return None
+    else:
+        return parents[city]
 
 
 class Agent:
@@ -62,7 +84,7 @@ class Agent:
         return None
 
     def iterative_deepening_search(self, map, city_a, city_b):
-        for depth in range(0, len(map.cities)):
+        for depth in range(0, len(map.cities)+10):
             info = self.dls(map, city_a, city_b, depth)
             if info["path"] != "cutoff":
                 return info
@@ -71,6 +93,7 @@ class Agent:
         self.goal = city_b
         queue = [city_a]  # LIFO - Holds a city until it is fully explored
         parent = {}
+        city_depth = {city_a: 0}
         info = dict()
         info["path"] = "failure"  # Failure until depth is exceeded or goal is found
         num_visited = 0
@@ -88,14 +111,15 @@ class Agent:
                 info["expanded"] = num_expanded
                 info["cost"] = calculate_cost(map, path)
                 return info
-            if len(queue) >= depth:
+            if city_depth[city] > depth:
                 info["path"] = "cutoff"
+                return info
             elif not is_cycle(parent, city):
                 for next_city in expand(map, city):
-                    if next_city not in visited:
-                        visited.append(next_city)
+                    if next_city != get_parent(parent, city) and next_city not in queue:
                         queue.append(next_city)
                         parent[next_city] = city
+                        city_depth[next_city] = city_depth[city] + 1
                         num_maintained += 1
                 num_expanded += 1
         return info
