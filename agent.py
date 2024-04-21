@@ -1,3 +1,6 @@
+from queue import PriorityQueue
+
+
 def expand(map, city):
     return map.get_neighbors(city)
 
@@ -33,21 +36,33 @@ def is_cycle(parents, city):
     return False
 
 
-# def calc_depth(parents, start, city):
-#     current = city
-#     city_depth = 0
-#     while current != start:
-#         current = get_parent(parents, current)
-#         city_depth += 1
-#         print(current)
-#     return city_depth
-
-
 def get_parent(parents, city):
     if city not in parents.keys():
         return None
     else:
         return parents[city]
+
+
+def in_priority_queue(queue, city):
+    for element in queue.queue:
+        if element[1] == city:
+            return True
+    return False
+
+
+def get_cost(queue, city):
+    for element in queue.queue:
+        if element[1] == city:
+            return element[0]
+    return None
+
+
+def replace_in_priority_queue(queue, city, new_cost):
+    for element in queue.queue:
+        if element[1] == city:
+            queue.queue.remove(element)
+            break
+    queue.put((new_cost, city))
 
 
 class Agent:
@@ -84,7 +99,7 @@ class Agent:
         return None
 
     def iterative_deepening_search(self, map, city_a, city_b):
-        for depth in range(0, len(map.cities)+10):
+        for depth in range(0, len(map.cities)):
             info = self.dls(map, city_a, city_b, depth)
             if info["path"] != "cutoff":
                 return info
@@ -123,3 +138,33 @@ class Agent:
                         num_maintained += 1
                 num_expanded += 1
         return info
+
+    def ucs(self, map, city_a, city_b):
+        self.goal = city_b
+        queue = PriorityQueue()
+        queue.put((0, city_a))
+        parent = {}
+        explored = []
+        num_expanded = 0  # Number of cities expanded by adding neighbors to frontier
+        num_maintained = 1  # Number of cities that enter the frontier. Begins at 1 for city_a.
+        while not queue.empty():
+            city_node = queue.get()
+            cost = city_node[0]
+            city = city_node[1]
+            explored.append(city)
+            if city == self.goal:
+                info = dict()
+                path = create_path(parent, city_a, city_b)
+                info["path"] = path
+                info["explored"] = len(explored)
+                info["maintained"] = num_maintained
+                info["expanded"] = num_expanded
+                info["cost"] = calculate_cost(map, path)
+                return info
+            else:
+                for next_city in expand(map, city):
+                    next_city_cost = cost + map.get_distance(city, next_city)
+                    if not in_priority_queue(queue, next_city) and next_city not in explored:
+                        queue.put((next_city_cost, next_city))
+                    elif in_priority_queue(queue, next_city) and next_city_cost < get_cost(queue, next_city):
+                        replace_in_priority_queue(queue, next_city, next_city_cost)

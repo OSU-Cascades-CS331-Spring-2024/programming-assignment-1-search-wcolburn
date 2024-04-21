@@ -48,9 +48,9 @@ def main(**kwargs):
         if search_type == "bfs":
             agent.bfs(map, city_a, city_b)
         elif search_type == "dls":
-            print(agent.iterative_deepening_search(map, city_a, city_b))
+            agent.iterative_deepening_search(map, city_a, city_b)
         elif search_type == "ucs":
-            ucs(map, city_a, city_b)
+            agent.ucs(map, city_a, city_b)
         elif search_type == "astar":
             astar(map, city_a, city_b)
 
