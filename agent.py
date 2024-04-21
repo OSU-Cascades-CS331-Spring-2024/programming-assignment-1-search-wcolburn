@@ -166,5 +166,9 @@ class Agent:
                     next_city_cost = cost + map.get_distance(city, next_city)
                     if not in_priority_queue(queue, next_city) and next_city not in explored:
                         queue.put((next_city_cost, next_city))
+                        parent[next_city] = city
+                        num_maintained += 1
                     elif in_priority_queue(queue, next_city) and next_city_cost < get_cost(queue, next_city):
                         replace_in_priority_queue(queue, next_city, next_city_cost)
+                        parent[next_city] = city
+                num_expanded += 1
