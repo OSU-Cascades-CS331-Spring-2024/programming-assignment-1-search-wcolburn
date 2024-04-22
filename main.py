@@ -3,6 +3,18 @@ from agent import Agent
 import argparse
 
 
+def convert_dms_to_dd(coordinates):
+    degrees = int(coordinates[0])
+    minutes = int(coordinates[1])
+    seconds = int(coordinates[2])
+    direction = coordinates[3]
+
+    dd = degrees + minutes/60 + seconds/3600
+    if direction == 'S' or direction == 'W':
+        dd *= -1
+    return dd
+
+
 def create_map_from_file(file_name):
     file = open(file_name)
     text = file.read().replace('\n', ' ').split()
@@ -12,11 +24,17 @@ def create_map_from_file(file_name):
         city = text[i]
         new_map.add_city(city)
 
-        coords = []
-        for _ in range(0, 8):  # Get coordinates for city
+        dms_longitude = []
+        dms_latitude = []
+        for _ in range(0, 4):  # Get longitude coordinates for city
             i += 1
-            coords.append(text[i])
-        new_map.coordinates[city] = coords
+            dms_longitude.append(text[i])
+        for _ in range(0, 4):  # Get latitude coordinates for city
+            i += 1
+            dms_latitude.append(text[i])
+        dd_longitude = convert_dms_to_dd(dms_longitude)
+        dd_latitude = convert_dms_to_dd(dms_latitude)
+        new_map.coordinates[city] = [dd_longitude, dd_latitude]
 
         i += 2  # Skip to neighbors
         while text[i][0] == 'v' and text[i][1] == 'a':
