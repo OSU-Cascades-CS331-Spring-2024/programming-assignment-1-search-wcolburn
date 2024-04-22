@@ -51,6 +51,15 @@ def create_map_from_file(file_name):
     return new_map
 
 
+def print_path(path):
+    for city in path:
+        print(city, end="")
+        if city != path[-1]:
+            print(" --> ", end="")
+        else:
+            print()
+
+
 def main(**kwargs):
     file_name = kwargs["map"]
     map = create_map_from_file(file_name)
@@ -71,7 +80,7 @@ def main(**kwargs):
             result = agent.ucs(map, city_a, city_b)
         elif search_type == "astar":
             result = agent.astar(map, city_a, city_b)
-        print("Path: ")
+        print("Path: ", end="")
         print_path(result["path"])
 
 
