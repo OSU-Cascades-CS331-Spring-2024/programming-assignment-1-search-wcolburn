@@ -11,7 +11,14 @@ def create_map_from_file(file_name):
     while i < len(text):
         city = text[i]
         new_map.add_city(city)
-        i += 10  # Skip coordinates
+
+        coords = []
+        for _ in range(0, 8):  # Get coordinates for city
+            i += 1
+            coords.append(text[i])
+        new_map.coordinates[city] = coords
+
+        i += 2  # Skip to neighbors
         while text[i][0] == 'v' and text[i][1] == 'a':
             if text[i] == "va-":  # In case of line breaking
                 i += 1
@@ -24,14 +31,6 @@ def create_map_from_file(file_name):
                 break
     file.close()
     return new_map
-
-
-def ucs(map, city_a, city_b):
-    pass
-
-
-def astar(map, city_a, city_b):
-    pass
 
 
 def main(**kwargs):
@@ -50,9 +49,9 @@ def main(**kwargs):
         elif search_type == "dls":
             agent.iterative_deepening_search(map, city_a, city_b)
         elif search_type == "ucs":
-            print(agent.ucs(map, city_a, city_b))
+            agent.ucs(map, city_a, city_b)
         elif search_type == "astar":
-            astar(map, city_a, city_b)
+            print(agent.astar(map, city_a, city_b))
 
 
 if __name__ == '__main__':

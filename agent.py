@@ -172,3 +172,6 @@ class Agent:
                         replace_in_priority_queue(queue, next_city, next_city_cost)
                         parent[next_city] = city
                 num_expanded += 1
+
+    def astar(self, map, city_a, city_b):
+        pass

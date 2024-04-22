@@ -4,6 +4,7 @@ class Map:
             cities = []
         self.cities = cities
         self.distances = {}
+        self.coordinates = {}
 
     def add_distance(self, city1, city2, distance):
         if city1 not in self.distances:
