@@ -52,7 +52,7 @@ def create_map_from_file(file_name):
 
 
 def main(**kwargs):
-    file_name = kwargs["file"]
+    file_name = kwargs["map"]
     map = create_map_from_file(file_name)
 
     agent = Agent()
@@ -62,22 +62,25 @@ def main(**kwargs):
         city_a = kwargs["A"]
         city_b = kwargs["B"]
 
+        result = dict()
         if search_type == "bfs":
-            agent.bfs(map, city_a, city_b)
+            result = agent.bfs(map, city_a, city_b)
         elif search_type == "dls":
-            agent.iterative_deepening_search(map, city_a, city_b)
+            result = agent.iterative_deepening_search(map, city_a, city_b)
         elif search_type == "ucs":
-            agent.ucs(map, city_a, city_b)
+            result = agent.ucs(map, city_a, city_b)
         elif search_type == "astar":
-            print(agent.astar(map, city_a, city_b))
+            result = agent.astar(map, city_a, city_b)
+        print("Path: ")
+        print_path(result["path"])
 
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
-    p.add_argument("-s", "--search", help="Search type", default="bfs", choices=("bfs", "dls", "ucs", "astar"))
+    p.add_argument("-S", "--search", help="Search type", default="bfs", choices=("bfs", "dls", "ucs", "astar"))
     p.add_argument("-A", help="Initial city", required=False)
     p.add_argument("-B", help="End city", required=False)
-    p.add_argument("-f", "--file", help="File to load map from", required=True)
+    p.add_argument("-M", "--map", help="File to load map from", required=True)
 
     args = p.parse_args()
     main(**vars(args))

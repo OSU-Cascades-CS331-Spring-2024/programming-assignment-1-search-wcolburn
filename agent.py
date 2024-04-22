@@ -175,7 +175,7 @@ class Agent:
                         parent[next_city] = city
                 num_expanded += 1
 
-    def estimate_distance_to_goal(self, map, city):
+    def calc_distance_to_goal(self, map, city):
         city_coords = map.coordinates[city]
         goal_coords = map.coordinates[self.goal]
 
@@ -184,8 +184,44 @@ class Agent:
         goal_y = goal_coords[0]
         goal_x = goal_coords[1]
 
-        return math.sqrt((goal_x - city_x) ** 2 + (goal_y - city_y) ** 2)
+        return 10 * (math.sqrt((goal_x - city_x) ** 2 + (goal_y - city_y) ** 2))
 
     def astar(self, map, city_a, city_b):
         self.goal = city_b
-        return map.get_distance(city_a, city_a)
+        queue = PriorityQueue()  # Ordered first out by distance
+        g = {}  # Cost from city_a to a given city
+        h = {}  # Estimated cost of the shortest path to city_b from a given city
+        g[city_a] = 0
+        h[city_a] = self.calc_distance_to_goal(map, city_a)
+        city_a_cost = g[city_a] + h[city_a]
+        queue.put((city_a_cost, city_a))
+        parent = {}
+        explored = []
+        num_expanded = 0  # Number of cities expanded by adding neighbors to frontier
+        num_maintained = 1  # Number of cities that enter the frontier. Begins at 1 for city_a.
+        while not queue.empty():
+            city_node = queue.get()
+            city = city_node[1]
+            explored.append(city)
+            if city == self.goal:
+                info = dict()
+                path = create_path(parent, city_a, city_b)
+                info["path"] = path
+                info["explored"] = len(explored)
+                info["maintained"] = num_maintained
+                info["expanded"] = num_expanded
+                info["cost"] = calculate_cost(map, path)
+                return info
+            else:
+                for next_city in expand(map, city):
+                    temp_g = g[city] + map.get_distance(city, next_city)
+                    h[next_city] = self.calc_distance_to_goal(map, next_city)
+                    next_city_estimated_cost = temp_g + h[next_city]
+                    if not in_priority_queue(queue, next_city) and next_city not in explored:
+                        queue.put((next_city_estimated_cost, next_city))
+                        parent[next_city] = city
+                        num_maintained += 1
+                    elif in_priority_queue(queue, next_city) and next_city_estimated_cost < get_cost(queue, next_city):
+                        replace_in_priority_queue(queue, next_city,next_city_estimated_cost)
+                        parent[next_city] = city
+                num_expanded += 1
