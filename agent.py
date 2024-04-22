@@ -1,4 +1,6 @@
+import math
 from queue import PriorityQueue
+from math import sqrt
 
 
 def expand(map, city):
@@ -141,7 +143,7 @@ class Agent:
 
     def ucs(self, map, city_a, city_b):
         self.goal = city_b
-        queue = PriorityQueue()
+        queue = PriorityQueue()  # Ordered first out by distance
         queue.put((0, city_a))
         parent = {}
         explored = []
@@ -172,6 +174,17 @@ class Agent:
                         replace_in_priority_queue(queue, next_city, next_city_cost)
                         parent[next_city] = city
                 num_expanded += 1
+
+    def estimate_distance_to_goal(self, map, city):
+        city_coords = map.coordinates[city]
+        goal_coords = map.coordinates[self.goal]
+
+        city_y = city_coords[0]
+        city_x = city_coords[1]
+        goal_y = goal_coords[0]
+        goal_x = goal_coords[1]
+
+        return math.sqrt((goal_x - city_x) ** 2 + (goal_y - city_y) ** 2)
 
     def astar(self, map, city_a, city_b):
         pass
