@@ -9,7 +9,7 @@ def convert_dms_to_dd(coordinates):
     seconds = int(coordinates[2])
     direction = coordinates[3]
 
-    dd = degrees + minutes/60 + seconds/3600
+    dd = degrees + minutes / 60 + seconds / 3600
     if direction == 'S' or direction == 'W':
         dd *= -1
     return dd
@@ -52,12 +52,21 @@ def create_map_from_file(file_name):
 
 
 def print_path(path):
+    print("Path: ", end="")
     for city in path:
         print(city, end="")
         if city != path[-1]:
             print(" --> ", end="")
         else:
             print()
+
+
+def print_results(result):
+    print_path(result["path"])
+    print("Total cost: " + str(result["cost"]))
+    print("Number of nodes explored: " + str(result["explored"]))
+    print("Number of nodes expanded: " + str(result["expanded"]))
+    print("Number of nodes maintained: " + str(result["maintained"]))
 
 
 def main(**kwargs):
@@ -80,8 +89,7 @@ def main(**kwargs):
             result = agent.ucs(map, city_a, city_b)
         elif search_type == "astar":
             result = agent.astar(map, city_a, city_b)
-        print("Path: ", end="")
-        print_path(result["path"])
+        print_results(result)
 
 
 if __name__ == '__main__':
