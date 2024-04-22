@@ -15,6 +15,8 @@ class Map:
         self.distances[city2][city1] = distance
 
     def get_distance(self, city1, city2):
+        if city1 == city2:
+            return 0
         return self.distances[city1][city2]
 
     def get_neighbors(self, city):

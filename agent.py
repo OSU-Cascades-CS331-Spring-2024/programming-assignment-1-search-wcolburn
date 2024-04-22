@@ -187,4 +187,5 @@ class Agent:
         return math.sqrt((goal_x - city_x) ** 2 + (goal_y - city_y) ** 2)
 
     def astar(self, map, city_a, city_b):
-        pass
+        self.goal = city_b
+        return map.get_distance(city_a, city_a)
