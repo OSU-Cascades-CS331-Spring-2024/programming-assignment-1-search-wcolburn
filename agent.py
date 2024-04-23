@@ -219,9 +219,10 @@ class Agent:
                     next_city_estimated_cost = temp_g + h[next_city]
                     if not in_priority_queue(queue, next_city) and next_city not in explored:
                         queue.put((next_city_estimated_cost, next_city))
+                        g[next_city] = temp_g
                         parent[next_city] = city
                         num_maintained += 1
                     elif in_priority_queue(queue, next_city) and next_city_estimated_cost < get_cost(queue, next_city):
-                        replace_in_priority_queue(queue, next_city,next_city_estimated_cost)
+                        replace_in_priority_queue(queue, next_city, next_city_estimated_cost)
                         parent[next_city] = city
                 num_expanded += 1
