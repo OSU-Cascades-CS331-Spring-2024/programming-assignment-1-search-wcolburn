@@ -7,9 +7,9 @@ Number of times it found the optimal solution: 2
 
 Dls
 ----
-Average explored: 9.88888888888889
-Average expanded: 8.11111111111111
-Average maintained: 14.11111111111111
+Average explored: 30.555555555555557
+Average expanded: 25.0
+Average maintained: 48.55555555555556
 Number of times it found the optimal solution: 1
 
 Ucs

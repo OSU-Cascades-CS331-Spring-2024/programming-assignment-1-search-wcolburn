@@ -10,9 +10,9 @@ Number of nodes maintained: 18
 DLS:
 Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> marseille --> nice
 Total cost: 1591
-Number of nodes explored: 9
-Number of nodes expanded: 8
-Number of nodes maintained: 14
+Number of nodes explored: 35
+Number of nodes expanded: 28
+Number of nodes maintained: 54
 
 UCS:
 Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> marseille --> nice
@@ -40,9 +40,9 @@ Number of nodes maintained: 18
 DLS:
 Path: montpellier --> toulouse --> limoges --> paris --> calais
 Total cost: 1225
-Number of nodes explored: 14
-Number of nodes expanded: 10
-Number of nodes maintained: 21
+Number of nodes explored: 17
+Number of nodes expanded: 13
+Number of nodes maintained: 27
 
 UCS:
 Path: montpellier --> avignon --> lyon --> dijon --> paris --> calais
@@ -70,9 +70,9 @@ Number of nodes maintained: 17
 DLS:
 Path: strasbourg --> dijon --> paris --> rennes --> nantes --> bordeaux
 Total cost: 1457
-Number of nodes explored: 7
-Number of nodes expanded: 6
-Number of nodes maintained: 12
+Number of nodes explored: 15
+Number of nodes expanded: 11
+Number of nodes maintained: 28
 
 UCS:
 Path: strasbourg --> nancy --> paris --> limoges --> bordeaux
@@ -100,9 +100,9 @@ Number of nodes maintained: 16
 DLS:
 Path: paris --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> grenoble
 Total cost: 1616
-Number of nodes explored: 11
-Number of nodes expanded: 10
-Number of nodes maintained: 17
+Number of nodes explored: 51
+Number of nodes expanded: 43
+Number of nodes maintained: 95
 
 UCS:
 Path: paris --> dijon --> lyon --> grenoble
@@ -130,9 +130,9 @@ Number of nodes maintained: 15
 DLS:
 Path: grenoble --> avignon --> montpellier --> toulouse --> limoges --> paris
 Total cost: 1246
-Number of nodes explored: 8
-Number of nodes expanded: 7
-Number of nodes maintained: 11
+Number of nodes explored: 16
+Number of nodes expanded: 12
+Number of nodes maintained: 23
 
 UCS:
 Path: grenoble --> lyon --> dijon --> paris
@@ -160,9 +160,9 @@ Number of nodes maintained: 16
 DLS:
 Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> grenoble
 Total cost: 1509
-Number of nodes explored: 10
-Number of nodes expanded: 9
-Number of nodes maintained: 14
+Number of nodes explored: 44
+Number of nodes expanded: 36
+Number of nodes maintained: 68
 
 UCS:
 Path: brest --> rennes --> nantes --> limoges --> lyon --> grenoble
@@ -190,9 +190,9 @@ Number of nodes maintained: 18
 DLS:
 Path: grenoble --> avignon --> montpellier --> toulouse --> limoges --> paris --> rennes --> brest
 Total cost: 1837
-Number of nodes explored: 11
-Number of nodes expanded: 10
-Number of nodes maintained: 17
+Number of nodes explored: 33
+Number of nodes expanded: 27
+Number of nodes maintained: 50
 
 UCS:
 Path: grenoble --> lyon --> limoges --> nantes --> rennes --> brest
@@ -220,9 +220,9 @@ Number of nodes maintained: 14
 DLS:
 Path: nice --> marseille --> avignon --> montpellier --> toulouse --> limoges --> nantes
 Total cost: 1254
-Number of nodes explored: 19
-Number of nodes expanded: 13
-Number of nodes maintained: 21
+Number of nodes explored: 64
+Number of nodes expanded: 55
+Number of nodes maintained: 92
 
 UCS:
 Path: nice --> marseille --> avignon --> montpellier --> toulouse --> bordeaux --> nantes

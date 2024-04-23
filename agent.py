@@ -101,10 +101,25 @@ class Agent:
         return None
 
     def iterative_deepening_search(self, map, city_a, city_b):
+        final_result = dict()
+        total_expanded = 0
+        total_maintained = 0
+        total_explored = 0
         for depth in range(0, len(map.cities)):
             info = self.dls(map, city_a, city_b, depth)
-            if info["path"] != "cutoff":
-                return info
+            if info["path"] == "cutoff":
+                total_expanded += info["expanded"]
+                total_maintained += info["maintained"]
+                total_explored += info["explored"]
+            else:
+                if info["path"] != "failure":
+                    final_result["cost"] = info["cost"]
+                final_result["path"] = info["path"]
+                final_result["explored"] = total_explored
+                final_result["maintained"] = total_maintained
+                final_result["expanded"] = total_expanded
+                return final_result
+
 
     def dls(self, map, city_a, city_b, depth):
         self.goal = city_b
@@ -130,6 +145,9 @@ class Agent:
                 return info
             if city_depth[city] > depth:
                 info["path"] = "cutoff"
+                info["explored"] = num_visited
+                info["maintained"] = num_maintained
+                info["expanded"] = num_expanded
                 return info
             elif not is_cycle(parent, city):
                 for next_city in expand(map, city):
@@ -141,7 +159,6 @@ class Agent:
                         city_depth[next_city] = city_depth[city] + 1
                         num_maintained += 1
                 num_expanded += 1
-        print(parent)
         return info
 
     def ucs(self, map, city_a, city_b):
