@@ -5,6 +5,9 @@ import sys
 import os
 
 
+#
+#  Converts coordinates from Degrees, Minutes, Seconds to Decimal Degrees
+#
 def convert_dms_to_dd(coordinates):
     degrees = int(coordinates[0])
     minutes = int(coordinates[1])
@@ -17,6 +20,9 @@ def convert_dms_to_dd(coordinates):
     return dd
 
 
+#
+#  Creates and populates a new Map object with the specified map file
+#
 def create_map_from_file(file_name):
     file = open(file_name)
     text = file.read().replace('\n', ' ').split()
@@ -53,6 +59,9 @@ def create_map_from_file(file_name):
     return new_map
 
 
+#
+#  Prints the path from start city to end city
+#
 def print_path(path):
     print("Path: ", end="")
     for city in path:
@@ -63,6 +72,9 @@ def print_path(path):
             print()
 
 
+#
+#  Prints total cost, number of nodes explored, maintained, and expanded
+#
 def print_results(result):
     if result["path"] == "failure":
         print("Path failure")
@@ -74,6 +86,9 @@ def print_results(result):
     print("Number of nodes maintained: " + str(result["maintained"]))
 
 
+#
+#  Write the results of each search for a path to solutions.txt
+#
 def print_results_to_solution_file(results):
     # Source: https://www.blog.pythonlibrary.org/2016/06/16/python-101-redirecting-stdout/
     original = sys.stdout
@@ -95,6 +110,10 @@ def print_results_to_solution_file(results):
     sys.stdout = original
 
 
+#
+#  Calculates the average number of explored, expanded, and maintained nodes. Also calculates the number of optimal
+#  solutions found.
+#
 def calc_averages(results):
     datas = []
     for search in results:
@@ -137,6 +156,9 @@ def calc_averages(results):
     return datas
 
 
+#
+#  Writes the averages of the results of each search over the nine paths to README.txt
+#
 def write_averages(averages):
     f = open('README.txt', 'w')
     for search in averages:
@@ -149,6 +171,10 @@ def write_averages(averages):
     f.close()
 
 
+#
+#  Parses the command line. If a start and end city are given, run the specified search on them
+#  Else, run all four search types over four cities
+#
 def main(**kwargs):
     file_name = kwargs["map"]
     map = create_map_from_file(file_name)
@@ -200,6 +226,9 @@ def main(**kwargs):
         write_averages(averages)
 
 
+#
+#  Sends command line arguments to main()
+#
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument("-S", "--search", help="Search type", default="bfs", choices=("bfs", "dls", "ucs", "astar"))

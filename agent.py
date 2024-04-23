@@ -3,10 +3,16 @@ from queue import PriorityQueue
 from math import sqrt
 
 
+#
+#  Returns the neighbors of city
+#
 def expand(map, city):
     return map.get_neighbors(city)
 
 
+#
+#  Returns the total cost of a given path
+#
 def calculate_cost(map, path):
     cost = 0
     for i in range(len(path) - 1):
@@ -16,6 +22,9 @@ def calculate_cost(map, path):
     return cost
 
 
+#
+#  Returns an array of cities, from the start city to end city, in the order of the path
+#
 def create_path(parent_list, start, end):
     path = []
     current = end
@@ -26,6 +35,9 @@ def create_path(parent_list, start, end):
     return path
 
 
+#
+#  Returns True if city has been maintained before
+#
 def is_cycle(parents, city):
     path = []
     current = city
@@ -38,6 +50,9 @@ def is_cycle(parents, city):
     return False
 
 
+#
+#  Returns the parent of a city
+#
 def get_parent(parents, city):
     if city not in parents.keys():
         return None
@@ -45,6 +60,9 @@ def get_parent(parents, city):
         return parents[city]
 
 
+#
+#  Returns True if city is in the queue
+#
 def in_priority_queue(queue, city):
     for element in queue.queue:
         if element[1] == city:
@@ -52,6 +70,9 @@ def in_priority_queue(queue, city):
     return False
 
 
+#
+#  Returns the priority/cost of a given city in a priority queue
+#
 def get_cost(queue, city):
     for element in queue.queue:
         if element[1] == city:
@@ -59,6 +80,9 @@ def get_cost(queue, city):
     return None
 
 
+#
+#  Updates city in the priority queue with a new priority/cost
+#
 def replace_in_priority_queue(queue, city, new_cost):
     for element in queue.queue:
         if element[1] == city:
@@ -119,7 +143,6 @@ class Agent:
                 final_result["maintained"] = total_maintained
                 final_result["expanded"] = total_expanded
                 return final_result
-
 
     def dls(self, map, city_a, city_b, depth):
         self.goal = city_b
@@ -195,6 +218,9 @@ class Agent:
                         parent[next_city] = city
                 num_expanded += 1
 
+    #
+    #  Heuristic for the distance a given city is from the goal city
+    #
     def calc_distance_to_goal(self, map, city):
         city_coords = map.coordinates[city]
         goal_coords = map.coordinates[self.goal]
