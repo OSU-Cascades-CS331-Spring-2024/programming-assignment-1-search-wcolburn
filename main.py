@@ -2,6 +2,7 @@ from map import Map
 from agent import Agent
 import argparse
 import sys
+import os
 
 
 def convert_dms_to_dd(coordinates):
@@ -94,6 +95,60 @@ def print_results_to_solution_file(results):
     sys.stdout = original
 
 
+def calc_averages(results):
+    datas = []
+    for search in results:
+        data = {"name": search, "optimal": 0}
+        s = results[search]
+
+        total_explored = 0
+        total_expanded = 0
+        total_maintained = 0
+        for result in s:
+            if result["path"] == "failure":
+                continue
+            total_explored += result["explored"]
+            total_expanded += result["expanded"]
+            total_maintained += result["maintained"]
+        data["explored"] = total_explored / len(s)
+        data["expanded"] = total_expanded / len(s)
+        data["maintained"] = total_maintained / len(s)
+        datas.append(data)
+
+    for i in range(0, len(results["bfs"])):  # Calculate number of times a search found the optimal solution
+        bfs_cost = results["bfs"][i]["cost"]
+        dls = results["dls"][i]
+        if dls["path"] != "failure":
+            dls_cost = dls["cost"]
+        else:
+            dls_cost = 10000000
+        ucs_cost = results["ucs"][i]["cost"]
+        astar_cost = results["astar"][i]["cost"]
+
+        lowest_cost = min(bfs_cost, dls_cost, ucs_cost, astar_cost)
+        if bfs_cost == lowest_cost:
+            datas[0]["optimal"] += 1
+        if dls_cost == lowest_cost:
+            datas[1]["optimal"] += 1
+        if ucs_cost == lowest_cost:
+            datas[2]["optimal"] += 1
+        if astar_cost == lowest_cost:
+            datas[3]["optimal"] += 1
+    return datas
+
+
+def write_averages(averages):
+    f = open('README.txt', 'w')
+    for search in averages:
+        f.write(search["name"].capitalize() + "\n")
+        f.write("----\n")
+        f.write("Average explored: " + str(search["explored"]) + "\n")
+        f.write("Average expanded: " + str(search["expanded"]) + "\n")
+        f.write("Average maintained: " + str(search["maintained"]) + "\n")
+        f.write("Number of times it found the optimal solution: " + str(search["optimal"]) + "\n\n")
+    f.close()
+
+
 def main(**kwargs):
     file_name = kwargs["map"]
     map = create_map_from_file(file_name)
@@ -119,15 +174,30 @@ def main(**kwargs):
         cities_to_search = [("brest", "nice"), ("montpellier", "calais"), ("strasbourg", "bordeaux"),
                             ("paris", "grenoble"), ("grenoble", "paris"), ("brest", "grenoble"), ("grenoble", "brest"),
                             ("nice", "nantes"), ("caen", "strasbourg")]
+        results = {"bfs": [], "dls": [], "ucs": [], "astar": [], }
+
+        if os.path.exists("solutions.txt"):
+            os.remove("solutions.txt")
+
         for city_pair in cities_to_search:
             city_a = city_pair[0]
             city_b = city_pair[1]
-            bfs_result = agent.bfs(map, city_a, city_b)
-            dls_result = agent.iterative_deepening_search(map, city_a, city_b)
-            ucs_result = agent.ucs(map, city_a, city_b)
-            astar_result = agent.astar(map, city_a, city_b)
-            print_results_to_solution_file([bfs_result, dls_result, ucs_result, astar_result])
 
+            bfs_result = agent.bfs(map, city_a, city_b)
+            results["bfs"].append(bfs_result)
+
+            dls_result = agent.iterative_deepening_search(map, city_a, city_b)
+            results["dls"].append(dls_result)
+
+            ucs_result = agent.ucs(map, city_a, city_b)
+            results["ucs"].append(ucs_result)
+
+            astar_result = agent.astar(map, city_a, city_b)
+            results["astar"].append(astar_result)
+
+            print_results_to_solution_file([bfs_result, dls_result, ucs_result, astar_result])
+        averages = calc_averages(results)
+        write_averages(averages)
 
 
 if __name__ == '__main__':
