@@ -168,6 +168,7 @@ def write_averages(averages):
         f.write("Average expanded: " + str(search["expanded"]) + "\n")
         f.write("Average maintained: " + str(search["maintained"]) + "\n")
         f.write("Number of times it found the optimal solution: " + str(search["optimal"]) + "\n\n")
+    f.write("See README.md for paragraph analyzing these results." + "\n")
     f.close()
 
 

@@ -26,3 +26,4 @@ Average expanded: 13.555555555555555
 Average maintained: 16.444444444444443
 Number of times it found the optimal solution: 9
 
+See README.md for paragraph analyzing these results.
