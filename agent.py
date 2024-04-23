@@ -133,12 +133,15 @@ class Agent:
                 return info
             elif not is_cycle(parent, city):
                 for next_city in expand(map, city):
+                    if next_city == "strasbourg":
+                        pass
                     if next_city != get_parent(parent, city) and next_city not in queue:
                         queue.append(next_city)
                         parent[next_city] = city
                         city_depth[next_city] = city_depth[city] + 1
                         num_maintained += 1
                 num_expanded += 1
+        print(parent)
         return info
 
     def ucs(self, map, city_a, city_b):

@@ -1,0 +1,266 @@
+Solutions for traveling from brest to nice
+----------------------------------------------------
+BFS:
+Path: brest --> rennes --> paris --> limoges --> lyon --> avignon --> marseille --> nice
+Total cost: 1930
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+DLS:
+Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> marseille --> nice
+Total cost: 1591
+Number of nodes explored: 9
+Number of nodes expanded: 8
+Number of nodes maintained: 14
+
+UCS:
+Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> marseille --> nice
+Total cost: 1591
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+AStar:
+Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> marseille --> nice
+Total cost: 1591
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+Solutions for traveling from montpellier to calais
+----------------------------------------------------
+BFS:
+Path: montpellier --> toulouse --> limoges --> paris --> calais
+Total cost: 1225
+Number of nodes explored: 18
+Number of nodes expanded: 15
+Number of nodes maintained: 18
+
+DLS:
+Path: montpellier --> toulouse --> limoges --> paris --> calais
+Total cost: 1225
+Number of nodes explored: 14
+Number of nodes expanded: 10
+Number of nodes maintained: 21
+
+UCS:
+Path: montpellier --> avignon --> lyon --> dijon --> paris --> calais
+Total cost: 1133
+Number of nodes explored: 17
+Number of nodes expanded: 16
+Number of nodes maintained: 18
+
+AStar:
+Path: montpellier --> avignon --> lyon --> dijon --> paris --> calais
+Total cost: 1133
+Number of nodes explored: 17
+Number of nodes expanded: 16
+Number of nodes maintained: 18
+
+Solutions for traveling from strasbourg to bordeaux
+----------------------------------------------------
+BFS:
+Path: strasbourg --> nancy --> paris --> limoges --> bordeaux
+Total cost: 1123
+Number of nodes explored: 17
+Number of nodes expanded: 12
+Number of nodes maintained: 17
+
+DLS:
+Path: strasbourg --> dijon --> paris --> rennes --> nantes --> bordeaux
+Total cost: 1457
+Number of nodes explored: 7
+Number of nodes expanded: 6
+Number of nodes maintained: 12
+
+UCS:
+Path: strasbourg --> nancy --> paris --> limoges --> bordeaux
+Total cost: 1123
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+AStar:
+Path: strasbourg --> nancy --> paris --> limoges --> bordeaux
+Total cost: 1123
+Number of nodes explored: 17
+Number of nodes expanded: 16
+Number of nodes maintained: 18
+
+Solutions for traveling from paris to grenoble
+----------------------------------------------------
+BFS:
+Path: paris --> limoges --> lyon --> grenoble
+Total cost: 918
+Number of nodes explored: 16
+Number of nodes expanded: 14
+Number of nodes maintained: 16
+
+DLS:
+Path: paris --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> grenoble
+Total cost: 1616
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 17
+
+UCS:
+Path: paris --> dijon --> lyon --> grenoble
+Total cost: 623
+Number of nodes explored: 13
+Number of nodes expanded: 12
+Number of nodes maintained: 15
+
+AStar:
+Path: paris --> dijon --> lyon --> grenoble
+Total cost: 623
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 15
+
+Solutions for traveling from grenoble to paris
+----------------------------------------------------
+BFS:
+Path: grenoble --> lyon --> limoges --> paris
+Total cost: 918
+Number of nodes explored: 15
+Number of nodes expanded: 10
+Number of nodes maintained: 15
+
+DLS:
+Path: grenoble --> avignon --> montpellier --> toulouse --> limoges --> paris
+Total cost: 1246
+Number of nodes explored: 8
+Number of nodes expanded: 7
+Number of nodes maintained: 11
+
+UCS:
+Path: grenoble --> lyon --> dijon --> paris
+Total cost: 623
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 15
+
+AStar:
+Path: grenoble --> lyon --> dijon --> paris
+Total cost: 623
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 15
+
+Solutions for traveling from brest to grenoble
+----------------------------------------------------
+BFS:
+Path: brest --> rennes --> paris --> limoges --> lyon --> grenoble
+Total cost: 1509
+Number of nodes explored: 16
+Number of nodes expanded: 14
+Number of nodes maintained: 16
+
+DLS:
+Path: brest --> rennes --> nantes --> bordeaux --> toulouse --> montpellier --> avignon --> grenoble
+Total cost: 1509
+Number of nodes explored: 10
+Number of nodes expanded: 9
+Number of nodes maintained: 14
+
+UCS:
+Path: brest --> rennes --> nantes --> limoges --> lyon --> grenoble
+Total cost: 1198
+Number of nodes explored: 15
+Number of nodes expanded: 14
+Number of nodes maintained: 16
+
+AStar:
+Path: brest --> rennes --> nantes --> limoges --> lyon --> grenoble
+Total cost: 1198
+Number of nodes explored: 14
+Number of nodes expanded: 13
+Number of nodes maintained: 16
+
+Solutions for traveling from grenoble to brest
+----------------------------------------------------
+BFS:
+Path: grenoble --> lyon --> limoges --> nantes --> rennes --> brest
+Total cost: 1198
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+DLS:
+Path: grenoble --> avignon --> montpellier --> toulouse --> limoges --> paris --> rennes --> brest
+Total cost: 1837
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 17
+
+UCS:
+Path: grenoble --> lyon --> limoges --> nantes --> rennes --> brest
+Total cost: 1198
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+AStar:
+Path: grenoble --> lyon --> limoges --> nantes --> rennes --> brest
+Total cost: 1198
+Number of nodes explored: 18
+Number of nodes expanded: 17
+Number of nodes maintained: 18
+
+Solutions for traveling from nice to nantes
+----------------------------------------------------
+BFS:
+Path: nice --> marseille --> avignon --> lyon --> limoges --> nantes
+Total cost: 1265
+Number of nodes explored: 14
+Number of nodes expanded: 10
+Number of nodes maintained: 14
+
+DLS:
+Path: nice --> marseille --> avignon --> montpellier --> toulouse --> limoges --> nantes
+Total cost: 1254
+Number of nodes explored: 19
+Number of nodes expanded: 13
+Number of nodes maintained: 21
+
+UCS:
+Path: nice --> marseille --> avignon --> montpellier --> toulouse --> bordeaux --> nantes
+Total cost: 1237
+Number of nodes explored: 14
+Number of nodes expanded: 13
+Number of nodes maintained: 17
+
+AStar:
+Path: nice --> marseille --> avignon --> montpellier --> toulouse --> bordeaux --> nantes
+Total cost: 1237
+Number of nodes explored: 14
+Number of nodes expanded: 13
+Number of nodes maintained: 17
+
+Solutions for traveling from caen to strasbourg
+----------------------------------------------------
+BFS:
+Path: caen --> calais --> nancy --> strasbourg
+Total cost: 989
+Number of nodes explored: 13
+Number of nodes expanded: 9
+Number of nodes maintained: 13
+
+DLS:
+Path failure
+
+UCS:
+Path: caen --> paris --> nancy --> strasbourg
+Total cost: 759
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 13
+
+AStar:
+Path: caen --> paris --> nancy --> strasbourg
+Total cost: 759
+Number of nodes explored: 11
+Number of nodes expanded: 10
+Number of nodes maintained: 13
+
